@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet New</title>
+        <style>
+            body {
+                background-color: #f8f9fa;
+                color: #343a40;
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                margin: auto;
+                max-width: 1000px;
+            }
+
+            h1 {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .container {
+                margin-top: 40px;
+            }
+
+            .form-group {
+                margin-bottom: 30px;
+            }
+
+            label {
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                font-size: 20px;
+                line-height: 2;
+                color: #495057;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+                transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            input[type="radio"],
+            input[type="checkbox"] {
+                margin-right: 0.5rem;
+            }
+
+            .btn {
+                font-size: 16px;
+                font-weight: 500;
+                padding: 0.375rem 0.75rem;
+                line-height: 1.5;
+                border-radius: 0.25rem;
+                transition: all 0.15s ease-in-out;
+            }
+
+            .btn-secondary {
+                color: #fff;
+                background-color: #6c757d;
+                border-color: #6c757d;
+            }
+
+            .btn-success {
+                color: #fff;
+                background-color: #28a745;
+                border-color: #28a745;
+            }
+
+            .btn-secondary:hover {
+                color: #fff;
+                background-color: #5a6268;
+                border-color: #545b62;
+            }
+
+            .btn-success:hover {
+                color: #fff;
+                background-color: #218838;
+                border-color: #1e7e34;
+            }
+
+            .card {
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+            }
+
+            .alert-danger {
+                color: #721c24;
+                background-color: #f8d7da;
+                border-color: #f5c6cb;
+            }
+
+            .invalid-feedback {
+                display: none;
+                width: 100%;
+                margin-top: 0.25rem;
+                font-size: 80%;
+                color: #dc3545;
+            }
+
+            input:invalid {
+                border-color: #dc3545;
+            }
+
+            input:invalid ~ .invalid-feedback {
+                display: block;
+            }
+
+            input:valid {
+                border-color: #28a745;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1>New Pet Log</h1>
+                <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+                <a href="/user/logout" class="btn btn-secondary">Logout</a>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert alert-danger card invalid-feedback mx-0 mb-0 p-1 text-center">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <form action="/pets/new/process" method="post" class="card">
+                <div class="row">
+                    <div class="group">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Pet name:</label>
+                            <input type="text" name="name" id="name" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="food" class="form-label">Food:</label>
+                            <textarea name="food" id="food" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes" class="form-label">Notes:</label>
+                            <textarea name="notes" id="notes" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="form-label">Date:</label>
+                            <input type="date" name="date" id="date" class="form-control">
+                        </div>
+                        <p class="form-label">Potty?:</p>
+                        <div class="form-check-inline">
+                            <input type="radio" name="potty" id="potty" value="1" class="form-check-input">
+                            <label for="potty_yes" class="form-label">Yes</label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input type="radio" name="potty" id="potty_no" value="0" class="form-check-input">
+                            <label for="potty_no" class="form-label">No</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Create</button>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet Log Dashboard</title>
+        <style>
+            body {
+                background-color: #343a40;
+                color: #fff;
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                padding: 40px;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .btn {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: uppercase;
+                cursor: pointer;
+                background-color: #107dbb;
+                color: #fff;
+            }
+
+            .btn-secondary {
+                background-color: #00ad56;
+            }
+
+            .btn-danger {
+                background-color: #dc3545;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+                border: 1px solid #dee2e6;
+            }
+
+            th {
+                background-color: #212529;
+                color: #fff;
+                text-align: center;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+
+
+            .text-center {
+                text-align: center;
+            }
+
+
+            h1 {
+                width: 100%;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1>
+                    Hi
+                    {{ user.first_name }}
+                    {{ user.last_name }}</h1>
+                <a href="/pets/new" class="btn btn-secondary">Create</a>
+                <a href="/user/logout" class="btn btn-secondary">Logout</a>
+            </div>
+            <div class="row">
+                <h4>Pet Logs:</h4>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Pet Name</th>
+                            <th>Potty</th>
+                            <th>Posted by</th>
+                            <th>Log</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pet in pets %}
+                            <tr>
+                                <td>{{ pet.name }}</td>
+                                <td>
+                                    {% if pet.potty == 1 %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+                                <td>{{ pet.creator.first_name }}</td>
+                                <td>
+                                    <a href="/pets/{{ pet.id }}" class="btn btn-success">View Instructions</a>
+                                    {% if session['user_id'] == pet.creator.id %}
+                                        <a href="/pets/edit/{{ pet.id }}" class="btn btn-secondary">Edit</a>
+                                        <a href="/pets/destroy/{{ pet.id }}" class="btn btn-danger">Delete</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

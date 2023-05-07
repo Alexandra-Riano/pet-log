@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet Edit</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f5f5f5;
+                color: #333;
+            }
+
+            .container {
+                max-width: 1000px;
+                margin: 0 auto;
+                padding: 50px;
+            }
+
+            h1 {
+                font-size: 36px;
+                margin: 0;
+            }
+
+            .btn {
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                color: #fff;
+
+            }
+            .btn-secondary {
+                background-color: #5b6167;
+            }
+            .form-group {
+                margin-bottom: 20px;
+            }
+
+            .form-label {
+                display: block;
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            input[type="text"],
+            input[type="date"],
+            textarea {
+                width: 100%;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            textarea {
+                height: 150px;
+            }
+
+            .form-check-inline {
+                display: inline-block;
+                margin-right: 10px;
+            }
+
+            .btn-update {
+                background-color: #238f3d;
+            }
+
+            .invalid-feedback {
+                font-size: 14px;
+                color: #dc3545;
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <h1>Edit Pet Log
+                    {{ pet.id }}</h1>
+                <a href="/dashboard" class="btn btn-secondary offset-2 col-2">Dashboard</a>
+                <a href="/user/logout" class="btn btn-secondary offset-1 col-1">Logout</a>
+            </div>
+            <div>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="alert alert-danger card invalid-feedback mx-0 mb-0 p-1 text-center">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <form action="/pets/edit/process/{{ pet.id }}" method="post" class="card bg-secondary">
+                <div class="row">
+                    <div class="group">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Pet name:</label>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ pet.name }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="food" class="form-label">Food:</label>
+                            <textarea name="food" id="food" class="form-control">{{ pet.food }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes" class="form-label">Notes:</label>
+                            <textarea name="notes" id="notes" class="form-control">{{ pet.notes }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="date" class="form-label">Date:</label>
+                            <input type="date" name="date" id="date" class="form-control" value="{{ pet.date }}">
+                        </div>
+                        <p class="form-label">Potty?:</p>
+                        <div class="form-check-inline">
+                            <input type="radio" name="potty" id="potty" value="1" class="form-check-input" {% if pet.potty == 1 %} checked {% endif %}>
+                            <label for="potty" class="form-label">Yes</label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input type="radio" name="potty" id="potty" value="0" class="form-check-input" {% if pet.potty == 0 %} checked {% endif %}>
+                            <label for="potty" class="form-label">No</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-update">Update</button>
+            </form>
+        </div>
+    </body>
+</html>

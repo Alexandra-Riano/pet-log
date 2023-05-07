@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pet View</title>
+        <style>
+            .container {
+                margin: 0 auto;
+                max-width: 1000px;
+                font-family: Arial, sans-serif;
+            }
+            h1 {
+                font-size: 2.5rem;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            .btn {
+                color: #fff;
+                background-color: #007bff;
+                text-decoration: none;
+                font-size: 16px;
+                border-radius: 0.25rem;
+                display: inline-block;
+                line-height: 1.5;
+                padding: 0.375rem 0.75rem;
+
+            }
+
+            .btn:hover {
+                background-color: #0069d9;
+                border-color: #0062cc;
+            }
+
+            h2 {
+                font-size: 2rem;
+                margin-top: 10px;
+            }
+
+            .text-end {
+                text-align: right;
+            }
+
+            .border {
+                padding: 20px;
+            }
+
+            .row > .col-4 {
+                font-weight: bold;
+            }
+
+            .row > .col-8 {
+                margin: 10px;
+            }
+
+            .row > .col-8 > span {
+                font-weight: bold;
+            }
+
+            .border {
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container row justify-content-center mx-auto mt-2">
+            <div class="row">
+                <h1 class="p-0 col-6">View Pet Log</h1>
+                <a href="/dashboard" class="btn btn-secondary offset-2 col-2" style="height: 70%;">Dashboard</a>
+                <a href="/user/logout" class="btn btn-secondary offset-1 col-1" style="height: 70%;">Logout</a>
+            </div>
+
+            <div class="row justify-content-between mt-5">
+                <h2 class='fs-1 col-6'>{{ pet.name }}</h2>
+                <p class="fs-3 col-6 text-end">Posted by:
+                    {{ pet.creator.first_name }}</p>
+            </div>
+
+            <div class="row border border-dark border-4 rounded rounded-3 p-3 fs-4">
+                <div class="row mb-3">
+                    <p class="col-4">Food:</p>
+                    <p class="col-8">{{ pet.food }}</p>
+                </div>
+                <div class="row mb-3">
+                    <p class="col-4">Potty?</p>
+                    <p class="col-8">
+                        {% if pet.potty == 1 %}
+                            Yes
+                        {% else %}
+                            No
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="row mb-3">
+                    <p class="col-4">Notes:</p>
+                    <p class="col-8">{{ pet.notes }}</p>
+                </div>
+                <div class="row mb-3">
+                    <p class="col-4">Date Made:</p>
+                    <p class="col-8">{{ pet.date.strftime('%B %dth, %Y') }}</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
