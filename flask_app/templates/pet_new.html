@@ -22,12 +22,9 @@
                 margin-bottom: 20px;
             }
 
-            .container {
-                margin-top: 40px;
-            }
 
             .form-group {
-                margin-bottom: 30px;
+                margin: 30px 20px;
             }
 
             label {
@@ -38,7 +35,7 @@
             input[type="text"],
             input[type="date"],
             textarea {
-                width: 100%;
+                width: 95%;
                 padding: 0.9rem 1rem;
                 font-size: 20px;
                 line-height: 2;
@@ -62,12 +59,14 @@
                 line-height: 1.5;
                 border-radius: 0.25rem;
                 transition: all 0.15s ease-in-out;
+                margin-bottom: 50px;
             }
 
             .btn-secondary {
                 color: #fff;
                 background-color: #6c757d;
                 border-color: #6c757d;
+                margin-right: 10px;
             }
 
             .btn-success {
@@ -133,7 +132,7 @@
                 {% with messages = get_flashed_messages() %}
                 {% if messages %}
                     {% for message in messages %}
-                        <p class="alert alert-danger card invalid-feedback mx-0 mb-0 p-1 text-center">{{ message }}</p>
+                        <p class="alert alert-danger card invalid-feedback">{{ message }}</p>
                     {% endfor %}
                 {% endif %}
                 {% endwith %}
@@ -157,9 +156,10 @@
                             <label for="date" class="form-label">Date:</label>
                             <input type="date" name="date" id="date" class="form-control">
                         </div>
+
                         <p class="form-label">Potty?:</p>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty" value="1" class="form-check-input">
+                            <input type="radio" name="potty" id="potty_yes" value="1" class="form-check-input">
                             <label for="potty_yes" class="form-label">Yes</label>
                         </div>
                         <div class="form-check-inline">

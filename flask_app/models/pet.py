@@ -2,7 +2,8 @@ from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models import user
 from flask import flash
 
-db = "recipes"
+
+db = "pets"
 
 
 class Pet:
@@ -21,19 +22,16 @@ class Pet:
 
 # get all pets from database and join them with users table
 
-
     @classmethod
     def get_all(cls):
         query = """
                 SELECT * FROM pets
-                LEFT JOIN users on pets.user_id = users.id;
+                JOIN users on pets.user_id = users.id;
                 """
         results = connectToMySQL(db).query_db(query)
-        if not results:
-            return []
         pets = []
         for row in results:
-            # create pet instance and add creator User instance
+            # create Pet instance and add creator User instance
             this_pet = cls(row)
             user_data = {
                 "id": row['users.id'],
@@ -50,16 +48,13 @@ class Pet:
 
 # get pet by id from database and join it with users table
     @classmethod
-    def get_by_id(cls, petID):
+    def get_by_id(cls, data):
         query = """
                 SELECT * FROM pets
                 JOIN users on pets.user_id = users.id
                 WHERE pets.id = %(id)s;
                 """
-        dataMap = {
-            'id': petID
-        }
-        result = connectToMySQL(db).query_db(query, dataMap)
+        result = connectToMySQL(db).query_db(query, data)
         if not result:
             return False
 
@@ -81,7 +76,7 @@ class Pet:
     @classmethod
     def save(cls, form_data):
         query = """
-                INSERT INTO pet (name,food,notes,date,potty,user_id)
+                INSERT INTO pets (name,food,notes,date,potty,user_id)
                 VALUES (%(name)s,%(food)s,%(notes)s,%(date)s,%(potty)s,%(user_id)s);
                 """
         return connectToMySQL(db).query_db(query, form_data)
@@ -91,43 +86,39 @@ class Pet:
         query = """
                 UPDATE pets
                 SET name = %(name)s,
-                description = %(food)s,
-                instructions = %(notes)s ,
-                date_made = %(date)s,
-                under_30 = %(potty)s
+                food = %(food)s,
+                notes = %(notes)s ,
+                date = %(date)s
+                potty = %(potty)s
                 WHERE id = %(id)s;
                 """
         return connectToMySQL(db).query_db(query, form_data)
 
     @classmethod
-    def destroy(cls, petID):
+    def destroy(cls, data):
         query = """
                 DELETE FROM pets
                 WHERE id = %(id)s;
                 """
-        dataMap = {
-            'id': petID
-        }
-        return connectToMySQL(db).query_db(query, dataMap)
+        return connectToMySQL(db).query_db(query, data)
 
     @staticmethod
     def validate_pet(form_data):
         is_valid = True
 
-        if len(form_data['name']) < 3:
-            flash("Name must be at least 3 characters long.")
+        if len(form_data['name']) < 2:
+            flash("Name must be at least 2 characters long.")
             is_valid = False
         if len(form_data['food']) < 3:
             flash("Food description must be at least 3 characters long.")
             is_valid = False
         if len(form_data['notes']) < 3:
             flash("Notes must be at least 3 characters long.")
-            is_valid = False
         if form_data['date'] == '':
             flash("Pick a date.")
             is_valid = False
-        if 'Potty' not in form_data:
-            flash("Pick whether your pet went potty or not.")
+        if 'potty' not in form_data:
+            flash("Pick whether they went potty or not.")
             is_valid = False
 
         return is_valid

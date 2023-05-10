@@ -1,5 +1,5 @@
-from flask import render_template, redirect, request, session
 from flask_app import app
+from flask import render_template, redirect, request, session
 from flask_app.models.pet import Pet
 from flask_app.models.user import User
 
@@ -16,8 +16,6 @@ def dashboard():
     # if user object is not found, log them out
     if not user:
         return redirect('/user/logout')
-
-    # get all pets and render dashboard template
     return render_template('dashboard.html', user=user, pets=Pet.get_all())
 
 
@@ -26,8 +24,6 @@ def create_pet():
     # check if user is logged in
     if 'user_id' not in session:
         return redirect('/user/login')
-
-    # render new pet form
     return render_template('pet_new.html')
 
 
@@ -60,7 +56,6 @@ def view_pet(id):
     if 'user_id' not in session:
         return redirect('/user/login')
 
-    # render the pet view template for the specified pet id
     return render_template('pet_view.html', pet=Pet.get_by_id({'id': id}))
 
 
@@ -70,7 +65,6 @@ def edit_pet(id):
     if 'user_id' not in session:
         return redirect('/user/login')
 
-    # render the pet edit template for the specified pet id
     return render_template('pet_edit.html', pet=Pet.get_by_id({'id': id}))
 
 
@@ -99,11 +93,8 @@ def process_edit_pet(id):
 
 @app.route('/pets/destroy/<int:id>')
 def destroy_pet(id):
-    # check if user is logged in
     if 'user_id' not in session:
         return redirect('/user/login')
 
-    Pet.destroy(id)
-    # delete the specified pet from the database and redirect to the dashboard
-    print(f"{id=} ")
+    Pet.destroy({'id': id})
     return redirect('/dashboard')

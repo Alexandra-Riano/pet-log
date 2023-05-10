@@ -109,7 +109,7 @@
                                 </td>
                                 <td>{{ pet.creator.first_name }}</td>
                                 <td>
-                                    <a href="/pets/{{ pet.id }}" class="btn btn-success">View Instructions</a>
+                                    <a href="/pets/{{ pet.id }}" class="btn btn-success">View Pet Log</a>
                                     {% if session['user_id'] == pet.creator.id %}
                                         <a href="/pets/edit/{{ pet.id }}" class="btn btn-secondary">Edit</a>
                                         <a href="/pets/destroy/{{ pet.id }}" class="btn btn-danger">Delete</a>
