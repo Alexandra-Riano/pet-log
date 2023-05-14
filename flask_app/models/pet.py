@@ -87,8 +87,8 @@ class Pet:
                 UPDATE pets
                 SET name = %(name)s,
                 food = %(food)s,
-                notes = %(notes)s ,
-                date = %(date)s
+                notes = %(notes)s,
+                date = %(date)s,
                 potty = %(potty)s
                 WHERE id = %(id)s;
                 """

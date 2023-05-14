@@ -18,7 +18,7 @@
 
             .card {
                 background-color: #fff;
-                padding: 40px;
+                padding: 70px;
                 width: 400px;
             }
 
@@ -60,9 +60,9 @@
         </style>
     </head>
     <body>
-        <div class="flex-container justify-content-center mx-auto mt-2">
+        <div class="flex-container">
 
-            <form action="/user/register/process" method="post" class="card col-4 mx-auto bg-secondary text-white p-3">
+            <form action="/user/register/process" method="post" class="card">
                 <h2>Register</h2>
                 <div>
                     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -75,28 +75,23 @@
                 </div>
                 <div class="form-group">
                     <label for="first_name" class="form-label">First Name:</label>
-                    <input type="text" name="first_name" id="first_name" class="form-control">
-                </div>
+                    <input type="text" name="first_name" id="first_name" class="form-control"></div>
                 <div class="form-group">
                     <label for="last_name" class="form-label">Last Name:</label>
-                    <input type="text" name="last_name" id="last_name" class="form-control">
-                </div>
+                    <input type="text" name="last_name" id="last_name" class="form-control"></div>
                 <div class="form-group">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="text" name="email" id="email" class="form-control">
-                </div>
+                    <input type="text" name="email" id="email" class="form-control"></div>
                 <div class="form-group">
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control">
-                </div>
+                    <input type="password" name="password" id="password" class="form-control"></div>
                 <div class="form-group">
                     <label for="confirm_password" class="form-label">Confirm Password:</label>
-                    <input type="password" name="confirm_password" id="confirm_password" class="form-control">
-                </div>
+                    <input type="password" name="confirm_password" id="confirm_password" class="form-control"></div>
                 <button type="submit" class="btn btn-register ">Register</button>
             </form>
 
-            <form action="/user/login/process" method="post" class="card col-4 mx-auto bg-secondary text-white p-3 login">
+            <form action="/user/login/process" method="post" class="card">
                 <h2>Login</h2>
                 <div>
                     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -109,12 +104,10 @@
                 </div>
                 <div class="form-group">
                     <label for="email" class="form-label">Email:</label>
-                    <input type="text" name="email" id="email" class="form-control">
-                </div>
+                    <input type="text" name="email" id="email" class="form-control"></div>
                 <div class="form-group">
                     <label for="password" class="form-label">Password:</label>
-                    <input type="password" name="password" id="password" class="form-control">
-                </div>
+                    <input type="password" name="password" id="password" class="form-control"></div>
                 <button type="submit" class="btn btn-login ">Login</button>
             </form>
         </div>

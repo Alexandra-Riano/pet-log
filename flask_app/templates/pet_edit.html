@@ -31,11 +31,13 @@
                 font-weight: bold;
                 text-align: center;
                 color: #fff;
-
             }
+
             .btn-secondary {
                 background-color: #5b6167;
+                margin-top: 20px;
             }
+
             .form-group {
                 margin-bottom: 20px;
             }
@@ -45,6 +47,7 @@
                 font-size: 20px;
                 font-weight: bold;
                 margin-bottom: 10px;
+                margin-top: 20px;
             }
 
             input[type="text"],
@@ -66,6 +69,7 @@
 
             .btn-update {
                 background-color: #238f3d;
+                margin-top: 20px;
             }
 
             .invalid-feedback {
@@ -113,13 +117,19 @@
                         </div>
                         <p class="form-label">Potty?:</p>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty" value="1" class="form-check-input" {% if pet.potty == 1 %} checked {% endif %}>
-                            <label for="potty" class="form-label">Yes</label>
+                            <input type="radio" name="potty" id="potty-yes" value="1" class="form-check-input" {% if pet.potty == 1 %} checked {% endif %}>
+                            <label for="potty-yes" class="form-label">Yes</label>
                         </div>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty" value="0" class="form-check-input" {% if pet.potty == 0 %} checked {% endif %}>
-                            <label for="potty" class="form-label">No</label>
+                            <input type="radio" name="potty" id="potty-no" value="0" class="form-check-input" {% if pet.potty == 0 %} checked {% endif %}>
+                            <label for="potty-no" class="form-label">No</label>
                         </div>
+                        <div class="form-check-inline">
+                            <input type="radio" name="potty" id="potty-unknown" value="-1" class="form-check-input" {% if pet.potty == -1 %} checked {% endif %}>
+                            <label for="potty-unknown" class="form-label">Both</label>
+                        </div>
+
+
                     </div>
                 </div>
                 <button type="submit" class="btn btn-update">Update</button>
