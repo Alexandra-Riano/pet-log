@@ -105,9 +105,13 @@
                                 <td>
                                     {% if pet.potty == 1 %}
                                         Yes
-                                    {% else %}
+                                    {% elif pet.potty == 0 %}
                                         No
+                                    {% else %}
+                                        Both
                                     {% endif %}
+
+
                                 </td>
                                 <td>{{ pet.creator.first_name }}</td>
                                 <td>

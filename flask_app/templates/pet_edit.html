@@ -31,6 +31,7 @@
                 font-weight: bold;
                 text-align: center;
                 color: #fff;
+                margin-right: 20px;
             }
 
             .btn-secondary {
@@ -63,8 +64,12 @@
             }
 
             .form-check-inline {
-                display: inline-block;
+                display: block;
                 margin-right: 10px;
+            }
+
+            .form-check-inline label {
+                display: inline-block;
             }
 
             .btn-update {
@@ -83,8 +88,8 @@
         <div class="container">
             <div class="row">
                 <h1>Edit Pet Log</h1>
-                <a href="/dashboard" class="btn btn-secondary offset-2 col-2">Dashboard</a>
-                <a href="/user/logout" class="btn btn-secondary offset-1 col-1">Logout</a>
+                <a href="/dashboard" class="btn btn-secondary ">Dashboard</a>
+                <a href="/user/logout" class="btn btn-secondary">Logout</a>
             </div>
             <div>
                 {% with messages = get_flashed_messages() %}
@@ -100,8 +105,7 @@
                     <div class="group">
                         <div class="form-group">
                             <label for="name" class="form-label">Pet name:</label>
-                            <input type="text" name="name" id="name" class="form-control" value="{{ pet.name }}">
-                        </div>
+                            <input type="text" name="name" id="name" class="form-control" value="{{ pet.name }}"></div>
                         <div class="form-group">
                             <label for="food" class="form-label">Food:</label>
                             <textarea name="food" id="food" class="form-control">{{ pet.food }}</textarea>
@@ -113,23 +117,21 @@
 
                         <div class="form-group">
                             <label for="date" class="form-label">Date:</label>
-                            <input type="date" name="date" id="date" class="form-control" value="{{ pet.date }}">
-                        </div>
+                            <input type="date" name="date" id="date" class="form-control" value="{{ pet.date }}"></div>
+
                         <p class="form-label">Potty?:</p>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty-yes" value="1" class="form-check-input" {% if pet.potty == 1 %} checked {% endif %}>
+                            <input type="radio" name="potty" id="potty-yes" value="1" class="form-check-input" {% if pet.potty == 1 %} checked="checked" {% endif %}>
                             <label for="potty-yes" class="form-label">Yes</label>
                         </div>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty-no" value="0" class="form-check-input" {% if pet.potty == 0 %} checked {% endif %}>
+                            <input type="radio" name="potty" id="potty-no" value="0" class="form-check-input" {% if pet.potty == 0 %} checked="checked" {% endif %}>
                             <label for="potty-no" class="form-label">No</label>
                         </div>
                         <div class="form-check-inline">
-                            <input type="radio" name="potty" id="potty-unknown" value="-1" class="form-check-input" {% if pet.potty == -1 %} checked {% endif %}>
+                            <input type="radio" name="potty" id="potty-unknown" value="-1" class="form-check-input" {% if pet.potty == -1 %} checked="checked" {% endif %}>
                             <label for="potty-unknown" class="form-label">Both</label>
                         </div>
-
-
                     </div>
                 </div>
                 <button type="submit" class="btn btn-update">Update</button>
